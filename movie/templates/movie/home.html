@@ -1,0 +1,17 @@
+{% extends  'movie/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Top 250</h1>
+    {% for i in movie %}
+        <h4>{{ i.name }}</h4><h4>{{ i.rating }}</h4>
+    {% endfor %}
+{% endblock %}
+
+{% block content2 %}
+    <h1>Top Rated Movies by Genre</h1>
+    {% for i in genres %}
+        <a href='{% url "genre_detail" i.pk %}'><h4>{{ i.genre }}</h4></a>
+    {% endfor %}
+{% endblock %}
