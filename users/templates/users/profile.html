@@ -1,5 +1,6 @@
 {% extends "users/base.html" %}
 {% load crispy_forms_tags %}
+
 {% block content %}
     <div class="content-section">
       <div class="media">
@@ -15,10 +16,17 @@
                 <legend class="border-bottom mb-4">Profile Info</legend>
                 {{ u_form|crispy }}
                 {{ p_form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Update</button>
-            </div>
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+    </div>
         </form>
+
+        {% if user.is_superuser %}
+                    <button class="btn btn-outline-info" type="submit"><a href="{% url "scraping" %}">Scraping</a></button>
+                {% endif %}
+
+        <br>
+        <button class="btn btn-danger" type="submit"><a href="{% url 'delete_user' %}">Delete Account</a></button>
     </div>
 {% endblock content %}

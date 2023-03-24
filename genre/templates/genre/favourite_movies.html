@@ -1,0 +1,16 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    {% for fav in fav_movies %}
+        {% if user_id == fav.user_id %}
+        <div class="content-section">
+            <h2>Movie name: {{ fav.name }}</h2>
+            <h4>Genre list: {{ fav.genre_list }}</h4>
+            <h4>Description: {{ fav.description }}</h4>
+            <h4>Year: {{ fav.year }}</h4>
+            <h4>Rating: {{ fav.rating }}</h4>
+            <button class="btn btn-outline-info"><a href="{% url 'removing_from_favorites' fav.pk %}">Remove from Favorites</a></button>
+        {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

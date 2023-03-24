@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from genre.models import Genre
 from .models import Movie
@@ -6,7 +6,19 @@ from bs4 import BeautifulSoup
 import requests
 
 
-def scr_top(request):
+def home(request):
+
+    genres = Genre.objects.all()
+    movies = Movie.objects.all()
+
+    return render(request, 'movie/home.html', {"movie": movies, "genres": genres})
+
+
+def about(request):
+    return render(request, 'movie/about.html')
+
+
+def scraping(request):
     # Top 250 scraping
 
     url = "https://www.imdb.com/chart/top/?ref_=nv_mp_mv250"
@@ -48,11 +60,4 @@ def scr_top(request):
                 genre1.url = url
                 genre1.save()
 
-    genres = Genre.objects.all()
-    movies = Movie.objects.all()
-
-    return render(request, 'movie/home.html', {"movie": movies, "genres": genres})
-
-
-def about(request):
-    return render(request, 'movie/about.html')
+    return render(request, 'movie/scrap_success.html')

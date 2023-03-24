@@ -1,7 +1,12 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegister, UserUpdateForm, ProfileUpdateForm
+from django.views.generic.edit import DeleteView
+from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+from genre.models import FavouriteMovie
 
 
 def registration_user(request):
@@ -37,3 +42,14 @@ def profile(request):
     }
     return render(request, 'users/profile.html', context)
 
+
+def delete_user(request):
+    del_fav = FavouriteMovie.objects.all()
+    for item in del_fav:
+        if item.user_id == request.user.id:
+            item.delete()
+
+    user = User.objects.get(id=request.user.id)
+    user.delete()
+
+    return redirect('signin')

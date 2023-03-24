@@ -14,6 +14,9 @@ urlpatterns = [
     path('signin/', auth_views.LoginView.as_view(template_name='users/signin.html'), name='signin'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('genre/', include('genre.urls')),
+    path('delete_user/', users_views.delete_user, name='delete_user'),
+    # path('delete_user/', users_views.DeleteUser.as_view(), name='delete_user')
+
 ]
 
 if settings.DEBUG:

@@ -1,16 +1,22 @@
 {% extends 'movie/base.html' %}
-
-{% block title %}Genre{% endblock %}
+{% load crispy_forms_tags %}
+{% block title %}Ganre{% endblock %}
 
 {% block content %}
-
     {% for movie in genre_page %}
-        <h1>Ganre details: {{ movie.name }}</h1>
-        <h3>Ganre genre_list: {{ movie.genre_list }}</h3>
-        <h3>Ganre description: {{ movie.description }}</h3>
-        <h3>Ganre year: {{ movie.year }}</h3>
-        <h3>Ganre rating: {{ movie.rating }}</h3>
+        <div class="content-section">
+            <h2>Movie name: {{ movie.name }}</h2>
+            <h4>Genre list: {{ movie.genre_list }}</h4>
+            <h4>Description: {{ movie.description }}</h4>
+            <h4>Year: {{ movie.year }}</h4>
+            <h4>Rating: {{ movie.rating }}</h4>
+
+        {% if request.user.is_authenticated %}
+                <button class="btn btn-outline-info"><a href="{% url 'add_to_favorites' movie.pk %}">Add to Favourite</a></button>
+        {% endif %}
+        </div>
     {% endfor %}
+
 {% endblock %}
 
 {% block content2 %}

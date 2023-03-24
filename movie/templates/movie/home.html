@@ -5,7 +5,10 @@
 {% block content %}
     <h1>Top 250</h1>
     {% for i in movie %}
-        <h4>{{ i.name }}</h4><h4>{{ i.rating }}</h4>
+        <div class="content-section">
+            <h4>Movie name: {{ i.name }}</h4>
+            <h4>Rating: {{ i.rating }}</h4>
+        </div>
     {% endfor %}
 {% endblock %}
 
